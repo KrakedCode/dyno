@@ -1,0 +1,192 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f1e1;
+    color: #3e3b32;
+    line-height: 1.6;
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  /* Navbar */
+  .navbar {
+    background-color: #1e1e2f;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  #navbar__logo {
+    font-size: 1.5rem;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .navbar__menu {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .navbar__item .label {
+    color: #fff;
+    transition: color 0.2s ease;
+  }
+  
+  .navbar__item .label:hover {
+    color: #ff8800;
+  }
+  
+  /* Hero Banner */
+  .hero__banner {
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    color: #fff;
+  }
+  
+  .hero__overlay {
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    padding: 3rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .hero__content {
+    max-width: 800px;
+  }
+  
+  .hero__title {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero__subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+  }
+  
+  .hero__cta {
+    padding: 0.75rem 1.5rem;
+    background-color: #ff8800;
+    border-radius: 6px;
+    color: #fff;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .hero__cta:hover {
+    background-color: #e87700;
+  }
+  
+  /* Main Info Section */
+  .main__section {
+    background-color: #fff;
+    padding: 3rem 2rem;
+  }
+  
+  .main__container {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .main__content h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #6a4e23;
+  }
+  
+  .main__content p {
+    font-size: 1.1rem;
+    color: #4b453a;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  /* Sign-in Check Section */
+  .form__section {
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .form__check {
+    text-align: center;
+  }
+  
+  .form__check button {
+    padding: 0.6rem 1.2rem;
+    background-color: #3e3b32;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .form__check button:hover {
+    background-color: #2e2c24;
+  }
+  
+  .notice {
+    color: #b22a00;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+  
+  /* Footer */
+  .footer {
+    background-color: #1e1e2f;
+    color: #ccc;
+    padding: 1rem 2rem;
+    text-align: center;
+    margin-top: 3rem;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero__title {
+      font-size: 2rem;
+    }
+  
+    .hero__subtitle {
+      font-size: 1rem;
+    }
+  
+    .main__content h2 {
+      font-size: 1.5rem;
+    }
+  
+    .main__content p {
+      font-size: 1rem;
+    }
+  }
+  

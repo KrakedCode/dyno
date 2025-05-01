@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f8;
+    color: #333;
+    line-height: 1.6;
+    padding-bottom: 50px;
+  }
+
+/* Navbar */
+.navbar {
+    background-color: #222;
+    padding: 1rem 2rem;
+    color: white;
+  }
+  
+  .navbar__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar__logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .navbar__menu {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .navbar__link {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .navbar__link:hover {
+    color: #ffd700;
+  }
+
+  /* carousel */
+  .glide {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    padding: 20px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    
+    display: flex;
+    scroll-behavior: smooth;
+  }
+
+  .glide::-webkit-scrollbar{
+    display: none;
+  }
+
+  .glide-track{
+    display: flex;
+    gap: 20px;
+    flex-wrap: nowrap;
+    
+  }
+
+  .glide-slide{
+    display: flex;
+    justify-content: center;
+  }
+  .goal-card{
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+    width: 200px;
+    height: 300px;
+    cursor: pointer;
+    perspective: 1000px;
+    position: relative;
+  }
+  .card {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    position: relative;
+   
+  }
+  
+  .card.flipped {
+    transform: rotateY(180deg);
+  }
+  
+  .card-face {
+    position: absolute;
+    backface-visibility: hidden;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    text-align: center;
+    flex-direction: column;
+  }
+  
+  .front {
+    background: linear-gradient(45deg, #ffcc00, #ff6600);
+    
+  }
+  
+  .back {
+    background: white;
+    transform: rotateY(180deg);
+  }
+  

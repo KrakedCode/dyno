@@ -1,0 +1,261 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  /* Navbar */
+  .navbar {
+    background-color: #1e1e2f;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  #navbar__logo {
+    font-size: 1.5rem;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .navbar__menu {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .navbar__item .label {
+    color: #fff;
+    transition: color 0.2s ease;
+  }
+  
+  .navbar__item .label:hover {
+    color: #ff8800;
+  }
+  
+  /* Hero Section */
+  .hero__banner {
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    color: #fff;
+  }
+  
+  .hero__overlay {
+    background: rgba(0, 0, 0, 0.55);
+    width: 100%;
+    height: 100%;
+    padding: 3rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .hero__content {
+    max-width: 800px;
+  }
+  
+  .hero__title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero__subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .hero__cta {
+    padding: 0.75rem 1.5rem;
+    background-color: #ff8800;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .hero__cta:hover {
+    background-color: #e87700;
+  }
+  
+  /* Stats Section */
+  .stats__section {
+    background-color: #ffffff;
+    padding: 3rem 2rem;
+  }
+  
+  .stats__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .stat__card {
+    background: #f1f3f5;
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  }
+  
+  .stat__title {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+  }
+  
+  .stat__value {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #1e1e2f;
+  }
+  
+  /* Main Section */
+  .main__section {
+    background-color: #e9ecef;
+    padding: 2rem;
+  }
+  
+  .main__content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .main__content h2 {
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+  }
+  
+  .main__content p {
+    font-size: 1rem;
+    color: #444;
+  }
+  
+  /* Forms */
+  .form__section {
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .form__card {
+    background-color: #fff;
+    padding: 2rem;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  
+  .form__card h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .form__group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form__group label {
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+    color: #333;
+  }
+  
+  .form__group input {
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .form__btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #28a745;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .form__btn:hover {
+    background-color: #218838;
+  }
+  
+  .form__check {
+    margin-top: 1rem;
+  }
+  
+  .form__check button {
+    padding: 0.5rem 1rem;
+    background-color: #0069d9;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .notice {
+    color: #dc3545;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  
+  /* Footer */
+  .footer {
+    background-color: #1e1e2f;
+    color: #ccc;
+    padding: 1rem 2rem;
+    text-align: center;
+    margin-top: 3rem;
+  }
+  
+  /* Responsive */
+  @media (max-width: 600px) {
+    .hero__title {
+      font-size: 1.8rem;
+    }
+  
+    .stat__value {
+      font-size: 1.5rem;
+    }
+  
+    .main__content h2 {
+      font-size: 1.5rem;
+    }
+  }
+  

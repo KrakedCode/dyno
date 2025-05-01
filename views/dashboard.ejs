@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard | Climb Pros</title>
+    <link href="/public/dashboard.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!--navbar section-->
+    <nav class="navbar">
+      <div class="navbar__container">
+        <a href="/" id="navbar__logo">
+          <i class="fa-solid fa-star">‌</i>Climb Pros</a
+        >
+        <ul class="navbar__menu">
+          <li class="navbar__item">
+            <a href="/" class="label">Home</a>
+          </li>
+          <li class="navbar__item">
+            <a href="/goals" class="label">Goals</a>
+          </li>
+          <li class="navbar__item">
+            <a href="/community" class="label">Community</a>
+          </li>
+          <li class="navbar__item">
+            <a href="/leaderboard" class="label">Leaderboard</a>
+          </li>
+          <li class="navbar__item">
+            <a href="/submit-climb" class="label">Record Climb</a>
+          </li>
+          <li class="navbar__item">
+            <a href="/logout" class="label">Log out</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!--New hero content-->
+    <section
+      class="hero__banner"
+      style="
+        background-image: url('/public/images/hero-rock.jpg');
+        background-size: cover;
+        background-position: center;
+      "
+    >
+      <div class="hero__overlay">
+        <div class="hero__content">
+          <h1 class="hero__title">Welcome back, <%= user.username %>!</h1>
+          <p class="hero__subtitle">
+            Ready to conquer new routes and top your best climb?
+          </p>
+          <a href="/submit-climb" class="hero__cta"> Record Climb</a>
+        </div>
+      </div>
+    </section>
+
+    <!--Stats Section-->
+    <section class="stats__section">
+      <div class="stats__container">
+        <div class="stat__card">
+          <h2 class="stat__title">Attempted Climbs</h2>
+          <p class="stat__value"><%= user.climbs%></p>
+        </div>
+        <div class="stat__card">
+          <h2 class="stat__title">Top Outs</h2>
+          <p class="stat__value"><%= user.topOuts %></p>
+        </div>
+        <div class="stat__card">
+          <h2 class="stat__title">Flashes</h2>
+          <p class="stat__value"><%= user.flash %></p>
+        </div>
+        <div class="stat__card">
+          <h2 class="stat__title">Hardest Climb</h2>
+          <p class="stat__value">V<%= user.best %></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main CTA Section -->
+    <section class="main__section">
+      <div class="main__container">
+        <div class="main__content">
+          <h2>Track your progress, climb smarter.</h2>
+          <p>
+            Use Climb Pros to log climbs, analyze your stats, and see how you
+            rank on the leaderboard. Whether you're chasing your first V3 or
+            projecting a V10 — we've got your back.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stat Update Form -->
+    <section class="form__section">
+      <form action="/updateStats" method="POST" class="form__card">
+        <h3>Manually Update Stats</h3>
+        <div class="form__group">
+          <label for="climbs">Attempted Climbs</label>
+          <input type="number" id="climbs" name="climbs" required />
+        </div>
+        <div class="form__group">
+          <label for="topOut">Completed Climbs</label>
+          <input type="number" id="topOut" name="topOut" required />
+        </div>
+        <div class="form__group">
+          <label for="flashed">Flashes</label>
+          <input type="number" id="flashed" name="flashed" required />
+        </div>
+        <div class="form__group">
+          <label for="difficulty">Highest Difficulty (V)</label>
+          <input type="number" id="difficulty" name="difficulty" required />
+        </div>
+        <% errors.forEach(error => { %>
+        <p><%=error %></p>
+        <% }) %>
+        <br />
+        <button type="submit" class="form__btn">Update Stats</button>
+      </form>
+
+      <!-- Check sign-in (for debug/dev) -->
+      <form action="/checkSignIn" method="POST" class="form__check">
+        <button>Check Sign-In</button>
+        <% if (status) { %>
+        <p class="notice"><%= status %></p>
+        <% } %>
+      </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer__content">
+        <p>&copy; 2025 Climb Pros | Keep Climbing 🚀</p>
+      </div>
+    </footer>
+  </body>
+</html>

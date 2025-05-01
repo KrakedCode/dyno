@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Welcome to Climb Pros!</title>
+    <link rel="stylesheet" href="/public/login.css" />
+  </head>
+  <body>
+    <div class="intro-container">
+      <div id="intro-steps">
+        <div class="step active">
+          <h2>Welcome to Climb Pros! 🧗‍♀️</h2>
+          <p>This is your hub for tracking your climbing journey.</p>
+        </div>
+        <div class="step">
+          <h2>Track Your Progress 📈</h2>
+          <p>Record attempts, flashes, and top-outs from your sessions.</p>
+        </div>
+        <div class="step">
+          <h2>Compete with Friends 🥇</h2>
+          <p>Check the leaderboard and see who’s crushing it.</p>
+        </div>
+        <div class="step">
+          <h2>Let’s Go! 🚀</h2>
+          <p>You’re all set. Ready to crush some routes?</p>
+        </div>
+      </div>
+
+      <button id="next">Next</button>
+    </div>
+
+    <style>
+      .intro-container {
+        text-align: center;
+        padding: 2rem;
+      }
+
+      .step {
+        display: none;
+      }
+
+      .step.active {
+        display: block;
+      }
+
+      button {
+        margin-top: 2rem;
+        padding: 0.7rem 1.4rem;
+        background-color: #28a745;
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+    </style>
+
+    <script>
+      const steps = document.querySelectorAll(".step");
+      let current = 0;
+      const nextBtn = document.getElementById("next");
+
+      nextBtn.addEventListener("click", () => {
+        steps[current].classList.remove("active");
+        current++;
+
+        if (current < steps.length) {
+          steps[current].classList.add("active");
+        } else {
+          window.location.href = "/intro-complete";
+        }
+      });
+    </script>
+  </body>
+</html>

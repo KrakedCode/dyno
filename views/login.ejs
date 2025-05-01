@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Climb Pros | Login</title>
+    <link href="/public/login.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="navbar__container">
+        <a href="/" id="navbar__logo">
+          <i class="fa-solid fa-star"></i>Climb Pros
+        </a>
+        <ul class="navbar__menu">
+          <li class="navbar__item"><a href="/" class="label">Home</a></li>
+
+          <li class="navbar__item">
+            <a href="/register" class="label">Create an Account</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Login Section -->
+    <section class="form__section">
+      <form action="/login" method="POST" class="form__card">
+        <h2 class="form__title">Sign In</h2>
+
+        <% errors.forEach(error => { %>
+        <p class="notice"><%= error %></p>
+        <% }) %>
+
+        <div class="form__group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            autocomplete="off"
+            required
+          />
+        </div>
+
+        <div class="form__group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            autocomplete="off"
+            required
+          />
+        </div>
+        <a href="/password" class="forgot-password">Forgot Password?</a>
+
+        <button type="submit" class="form__btn">Sign In</button>
+      </form>
+    </section>
+
+    <!-- Redirect CTA -->
+    <section class="main__section">
+      <div class="main__container">
+        <div class="main__content">
+          <h2>Don't have an account?</h2>
+          <a href="/register" class="hero__cta">Sign Up</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer__content">
+        <p>&copy; 2025 Climb Pros | Keep Climbing 🚀</p>
+      </div>
+    </footer>
+  </body>
+</html>

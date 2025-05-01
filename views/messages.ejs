@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat with <%= friend.username %> | Climb Pros</title>
+    <link href="/public/messages.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- 🌐 Navbar -->
+    <nav class="navbar">
+      <div class="navbar__container">
+        <a href="/" id="navbar__logo">
+          <i class="fa-solid fa-star"></i> Climb Pros
+        </a>
+        <ul class="navbar__menu">
+          <li class="navbar__item"><a href="/" class="label">Home</a></li>
+          <li class="navbar__item">
+            <a href="/community" class="label">Community</a>
+          </li>
+          <li class="navbar__item">
+            <a href="/leaderboard" class="label">Leaderboard</a>
+          </li>
+          <li class="navbar__item">
+            <a href="/submit-climb" class="label">Record Climb</a>
+          </li>
+          <li class="navbar__item">
+            <a href="/logout" class="label">Log out</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- 💬 Chat Banner -->
+    <section
+      class="hero__banner"
+      style="
+        background-image: url('/public/images/chat-banner.jpg');
+        background-size: cover;
+        background-position: center;
+      "
+    >
+      <div class="hero__overlay">
+        <div class="hero__content">
+          <h1 class="hero__title">Chat with <%= friend.username %></h1>
+          <p class="hero__subtitle">
+            Connect, share beta, and keep the stoke high.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 📩 Chat Section -->
+    <section class="chat__section">
+      <div class="chat__container">
+        <ul class="chat__list">
+          <% messages.forEach(msg => { %>
+          <li
+            class="chat__message <%= msg.sender_id === user.userid ? 'my-message' : 'their-message' %>"
+          >
+            <div class="chat__bubble">
+              <span class="chat__sender"><%= msg.senderName %>:</span>
+              <span class="chat__text"><%= msg.message %></span>
+              <span class="chat__timestamp"
+                ><%= new Date(msg.timestamp).toLocaleString() %></span
+              >
+            </div>
+          </li>
+          <% }) %>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 📝 Message Form -->
+    <section class="form__section">
+      <form
+        action="/messages/<%= friend.username %>"
+        method="POST"
+        class="form__card"
+      >
+        <h3>Send a Message</h3>
+        <div class="form__group">
+          <input
+            type="text"
+            name="message"
+            autocomplete="off"
+            placeholder="Type your message..."
+            required
+          />
+        </div>
+        <button type="submit" class="form__btn">Send</button>
+      </form>
+    </section>
+
+    <!-- 📌 Footer -->
+    <footer class="footer">
+      <div class="footer__content">
+        <p>&copy; 2025 Climb Pros | Keep Climbing 🚀</p>
+      </div>
+    </footer>
+  </body>
+</html>

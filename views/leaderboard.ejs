@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leaderboard | Climb Pros</title>
+    <link rel="stylesheet" href="/public/leaderboard.css" />
+    
+    <script>
+      // Auto-submit form on filter/order change
+      document.addEventListener("DOMContentLoaded", () => {
+        const filter = document.getElementById("filter");
+        const order = document.getElementById("order");
+        filter.addEventListener("change", () => document.getElementById("sortForm").submit());
+        order.addEventListener("change", () => document.getElementById("sortForm").submit());
+      });
+    </script>
+  </head>
+  <body>
+    <!-- 🌐 Navbar -->
+    <nav class="navbar">
+      <div class="navbar__container">
+        <a href="/" id="navbar__logo"><i class="fa-solid fa-star"></i> Climb Pros</a>
+        <ul class="navbar__menu">
+          <li class="navbar__item"><a href="/" class="label">Home</a></li>
+          <li class="navbar__item"><a href="/community" class="label">Community</a></li>
+          <li class="navbar__item"><a href="/submit-climb" class="label">Record Climb</a></li>
+          <li class="navbar__item"><a href="/logout" class="label">Log out</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- 🏆 Leaderboard Sorting -->
+    <section class="sort-controls">
+      <form id="sortForm" action="/leaderboard" method="GET">
+        <fieldset>
+          <legend>Sort the Leaderboard</legend>
+          <label for="filter">Filter by:</label>
+          <select name="filter" id="filter">
+            <option value="difficulty" <%= filter === 'difficulty' ? 'selected' : '' %>>Difficulty</option>
+            <option value="climbs" <%= filter === 'climbs' ? 'selected' : '' %>>Attempted Climbs</option>
+            <option value="topouts" <%= filter === 'topouts' ? 'selected' : '' %>>Completed Climbs</option>
+            <option value="flashes" <%= filter === 'flashes' ? 'selected' : '' %>>Flashes</option>
+          </select>
+
+          <label for="order">Order:</label>
+          <select name="order" id="order">
+            <option value="descending" <%= order === 'descending' ? 'selected' : '' %>>Descending</option>
+            <option value="ascending" <%= order === 'ascending' ? 'selected' : '' %>>Ascending</option>
+          </select>
+        </fieldset>
+      </form>
+    </section>
+
+    <!-- 📊 Leaderboard Table -->
+    <section class="leaderboard-section">
+      <h2>Leaderboard</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Username</th>
+            <th>Attempts</th>
+            <th>Completions</th>
+            <th>Flashes</th>
+            <th>Best Climb</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (leaderboard.length > 0) { %>
+            <% leaderboard.forEach(function(user, index) { 
+              let rowClass = '';
+              if (index === 0) rowClass = 'gold';
+              else if (index === 1) rowClass = 'silver';
+              else if (index === 2) rowClass = 'bronze';
+            %>
+              <tr class="<%= rowClass %>">
+                <td><%= index + 1 %></td>
+                <td><%= user.username %></td>
+                <td><%= user.attemptedClimbs %></td>
+                <td><%= user.completedClimbs %></td>
+                <td><%= user.flashes %></td>
+                <td>V<%= user.bestCompletedClimb %></td>
+              </tr>
+            <% }) %>
+          <% } else { %>
+            <tr><td colspan="6">No users on the leaderboard yet.</td></tr>
+          <% } %>
+        </tbody>
+      </table>
+    </section>
+  </body>
+</html>

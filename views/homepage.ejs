@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Climb Pros | Home</title>
+    <link href="/public/homepage.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="navbar__container">
+        <a href="/" id="navbar__logo">
+          <i class="fa-solid fa-star">‌</i>Climb Pros</a
+        >
+        <ul class="navbar__menu">
+          <li class="navbar__item">
+            <a href="/" class="label">Home</a>
+          </li>
+          <li class="navbar__item">
+            <a href="/leaderboard" class="label">Leaderboard</a>
+          </li>
+          <li class="navbar__item">
+            <a href="/community" class="label">Community</a>
+          </li>
+          <li class="navbar__item">
+            <a href="/submit-climb" class="label">Record Climb</a>
+          </li>
+          <li class="navbar__item">
+            <a href="/login" class="label">Sign In </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <section
+      class="hero__banner"
+      style="
+        background-image: url('/public/images/hero-rock.jpg');
+        background-size: cover;
+        background-position: center;
+      "
+    >
+      <div class="hero__overlay">
+        <div class="hero__content">
+          <h1 class="hero__title">Welcome to Climb Pros</h1>
+          <p class="hero__subtitle">
+            Track your climbs. Improve your skills. Join the community.
+          </p>
+          <a href="/register" class="hero__cta">Get Started</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="main__section">
+      <div class="main__container">
+        <div class="main__content">
+          <h2>Track your progress, climb smarter.</h2>
+          <p>
+            Use Climb Pros to log climbs, analyze your stats, and climb with
+            purpose. Whether you're starting out or projecting your hardest
+            route yet — we're with you every step.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Optional: Debug/Sign-in Checker -->
+    <section class="form__section">
+      <form action="/checkSignIn" method="POST" class="form__check">
+        <button>Check Sign-In</button>
+        <% if (status) { %>
+        <p class="notice"><%= status %></p>
+        <% } %>
+      </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer__content">
+        <p>&copy; 2025 Climb Pros | Keep Climbing 🚀</p>
+      </div>
+    </footer>
+  </body>
+</html>

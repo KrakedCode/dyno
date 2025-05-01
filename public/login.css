@@ -1,0 +1,218 @@
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .forgot-password{
+    color: #cf0000;
+  }
+  /* Navbar */
+  .navbar {
+    background-color: #1e1e2f;
+    padding: 1rem 2rem;
+  }
+  
+  .navbar__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  #navbar__logo {
+    font-size: 1.5rem;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .navbar__menu {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .navbar__item .label {
+    color: #fff;
+    transition: color 0.2s ease;
+  }
+  
+  .navbar__item .label:hover {
+    color: #ff8800;
+  }
+  
+  /* Form Section */
+  .form__section {
+    padding: 4rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e9ecef;
+  }
+  
+  .form__card {
+    background-color: #ffffff;
+    padding: 2.5rem 2rem;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form__title {
+    font-size: 1.75rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #1e1e2f;
+  }
+  
+  .form__group {
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form__group label {
+    font-size: 0.95rem;
+    color: #333;
+    margin-bottom: 0.3rem;
+  }
+  
+  .form__group input {
+    margin-bottom: 1rem;
+    padding: 0.65rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #fdfdfd;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form__group input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .form__btn {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .form__btn:hover {
+    background-color: #218838;
+  }
+  
+  
+  /* CTA Section */
+  .main__section {
+    background-color: #ffffff;
+    padding: 2rem;
+  }
+  
+  .main__container {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .main__content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #1e1e2f;
+  }
+  
+  .hero__cta {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    background-color: #007bff;
+    border-radius: 6px;
+    color: #fff;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .hero__cta:hover {
+    background-color: #0069d9;
+  }
+  
+  /* Feedback / Error Message */
+  .notice {
+    color: #dc3545;
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+  
+  /* Footer */
+  .footer {
+    background-color: #1e1e2f;
+    color: #ccc;
+    padding: 1rem 2rem;
+    text-align: center;
+    margin-top: 3rem;
+  }
+
+  /*Scripts section */
+  .form__validation {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #555;
+  }
+
+  .form__validation .rule {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.25rem;
+  }
+
+  .form__validation .icon {
+    font-weight: bold;
+    margin-right: 0.5rem;
+    color: red;
+  }
+  
+  .form__validation .icon:contains("✅") {
+    color: green;
+  }
+  
+  /* Responsive */
+  @media (max-width: 600px) {
+    .form__card {
+      padding: 2rem 1.5rem;
+    }
+  
+    .form__title {
+      font-size: 1.5rem;
+    }
+  
+    .main__content h2 {
+      font-size: 1.3rem;
+    }
+  
+    .hero__cta {
+      padding: 0.5rem 1rem;
+    }
+  }
+  

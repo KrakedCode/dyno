@@ -1,0 +1,170 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+    padding: 1rem;
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  /* Navbar */
+  .navbar {
+    background-color: #1e1e2f;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  #navbar__logo {
+    font-size: 1.5rem;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .navbar__menu {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .navbar__item .label {
+    color: #fff;
+    transition: color 0.2s ease;
+  }
+  
+  .navbar__item .label:hover {
+    color: #ff8800;
+  }
+  
+  /* Sort Controls Section */
+  .sort-controls {
+    margin: 2rem auto;
+    max-width: 600px;
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  
+  .sort-controls fieldset {
+    border: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .sort-controls label {
+    font-weight: 600;
+  }
+  
+  .sort-controls select {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  /* Leaderboard Section */
+  .leaderboard-section {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+  
+  .leaderboard-section h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  thead {
+    background-color: #343a40;
+    color: #fff;
+  }
+  
+  th, td {
+    padding: 0.75rem 1rem;
+    text-align: center;
+    border: 1px solid black;
+  }
+  
+  
+  tbody tr:nth-child(even) {
+    background-color: #f1f3f5;
+  }
+  
+  tbody tr:hover {
+    background-color: #e9ecef;
+    transition: background-color 0.3s ease;
+  }
+
+  tbody tr.gold:hover{
+    background-color: gold;
+    transition: background-color 0.3s ease;
+  } 
+  tbody tr.silver:hover{
+    background-color: silver;
+    transition: background-color 0.3s ease;
+  } 
+  tbody tr.bronze:hover{
+    background-color: #cd7f32;
+    transition: background-color 0.3s ease;
+  } 
+  
+  /* Rank Highlighting */
+  tr.gold td {
+    border: 2px solid gold;
+    font-weight: bold;
+  }
+  
+ 
+  tr.silver td {
+    border: 2px solid silver;
+    font-weight: bold;
+  }
+  
+  tr.bronze td {
+    border: 2px solid #cd7f32;
+    font-weight: bold;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .sort-controls fieldset {
+      flex-direction: column;
+    }
+  
+    table, thead, tbody, th, td, tr {
+      font-size: 0.9rem;
+    }
+  }
+  

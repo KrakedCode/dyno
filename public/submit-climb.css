@@ -1,0 +1,149 @@
+/* Base Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f1e1; /* Light beige */
+    color: #3e3b32; /* Deep brown for text */
+    line-height: 1.6;
+  }
+  
+  /* Link Styling */
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  /* Navbar */
+  .navbar {
+    background-color: #1e1e2f;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  #navbar__logo {
+    font-size: 1.5rem;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .navbar__menu {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .navbar__item .label {
+    color: #ffffff;
+    transition: color 0.2s ease;
+  }
+  
+  .navbar__item .label:hover {
+    color: #ff8800;
+  }
+  
+  /* Form Section */
+  .form__section {
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Card Wrapper */
+  .form__card {
+    background-color: #ffffff;
+    padding: 2rem;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Heading */
+  .form__card h2 {
+    font-size: 2rem;
+    color: #6a4e23;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Input Fields */
+  .form__group {
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form__group label {
+    font-size: 0.95rem;
+    color: #5a4d41;
+    margin-bottom: 0.4rem;
+  }
+  
+  .form__group input {
+    padding: 0.75rem;
+    font-size: 1rem;
+    color: #3e3b32;
+    background-color: #f9f4e8;
+    border: 2px solid #d1b29e;
+    border-radius: 6px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form__group input:focus {
+    border-color: #8e6e3e;
+    outline: none;
+  }
+  
+  /* Submit Button */
+  .form__btn {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1.125rem;
+    font-weight: bold;
+    background-color: #7a5c3f;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .form__btn:hover {
+    background-color: #6a4e3b;
+  }
+  
+  .form__btn:active {
+    background-color: #5a3e2b;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 600px) {
+    .form__card {
+      padding: 1.5rem;
+    }
+  
+    .form__card h2 {
+      font-size: 1.5rem;
+    }
+  
+    .form__btn {
+      font-size: 1rem;
+    }
+  }
+  
