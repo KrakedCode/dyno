@@ -6,8 +6,7 @@ const cookieParser = require('cookie-parser')
 //for carousel
 //const glider = require("glider")
 
-//mobile detection
-const MobileDetect = require('mobile-detect')
+
 
 //password encryption for storing in the database
 const bcrypt = require("bcrypt")
