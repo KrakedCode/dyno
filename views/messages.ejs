@@ -36,14 +36,9 @@
     </nav>
 
     <!-- 💬 Chat Banner -->
-    <section
-      class="hero__banner"
-      style="
-        background-image: url('/public/images/chat-banner.jpg');
-        background-size: cover;
-        background-position: center;
-      "
-    >
+    <% if(!messages) {%>
+
+    <section class="hero__banner">
       <div class="hero__overlay">
         <div class="hero__content">
           <h1 class="hero__title">Chat with <%= friend.username %></h1>
@@ -53,10 +48,10 @@
         </div>
       </div>
     </section>
-
+    <%} %>
     <!-- 📩 Chat Section -->
     <section class="chat__section">
-      <div class="chat__container">
+      <div class="chat__container" id="chatContainer">
         <ul class="chat__list">
           <% messages.forEach(msg => { %>
           <li
@@ -102,5 +97,11 @@
         <p>&copy; 2025 Climb Pros | Keep Climbing 🚀</p>
       </div>
     </footer>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const chatContainer = document.getElementById("chatContainer");
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      });
+    </script>
   </body>
 </html>

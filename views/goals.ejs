@@ -29,33 +29,66 @@
     <main class="community__container">
       <h1 class="page__title">Goals</h1>
 
-      <!--Carousel section-->
-      <div class="glide">
-        <div class="glide__track" data-glide-el="track">
-          <ul class="glide__slides">
-            <% goals.forEach(goal => { %>
-              <li class="glide__slide">
-                <div class="goal-card">
-                  <div class="card">
-                    <div class="card-face front">
-                      <h3><%= goal.title %></h3>
-                    </div>
-                    <div class="card-face back">
-                      <p>Category: <%=goal.category%></p>
-                      <p>Progress: <%= goal.progress %> / <%=goal.goal %></p>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            <% }) %>
-          </ul>
-        </div>
+
       
-        <div class="glide__arrows" data-glide-el="controls">
-          <button class="glide__arrow glide__arrow--left" data-glide-dir="<">←</button>
-          <button class="glide__arrow glide__arrow--right" data-glide-dir=">">→</button>
+      
+      
+      
+        <!--Carousel section-->
+        <div id="carousel-container" style="display: none;">
+          <div class="glide">
+            <div class="glide__track" data-glide-el="track">
+              <ul class="glide__slides">
+                <% goals.forEach(goal => { %>
+                  <li class="glide__slide">
+                    <div class="goal-card">
+                      <div class="card">
+                        <div class="card-face front">
+                          <h3><%= goal.title %></h3>
+                        </div>
+                        <div class="card-face back">
+                          <p>Category: <%=goal.category%></p>
+                          <p>Progress: <%= goal.progress %> / <%=goal.goal %></p>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                <% }) %>
+              </ul>
+            </div>
+  
+            <div class="glide__arrows" data-glide-el="controls">
+              <button class="glide__arrow glide__arrow--left" data-glide-dir="<">←</button>
+              <button class="glide__arrow glide__arrow--right" data-glide-dir=">">→</button>
+            </div>
+          </div>
         </div>
-      </div>
+
+        <!--Grid section-->
+        <div id="grid-container" class="goals-grid" style="display: none;">
+          <% goals.forEach(goal => { %>
+            <div class="goal-card">
+              <div class="card">
+                <div class="card-face front">
+                  <h3><%= goal.title %></h3>
+                </div>
+                <div class="card-face back">
+                  <p>Category: <%=goal.category%></p>
+                  <p>Progress: <%= goal.progress %> / <%=goal.goal %></p>
+                </div>
+              </div>
+            </div>
+          <%})%>
+        </div>
+        
+         
+        
+      
+      
+      
+      
+      
+        
       
       <h2 class="page__subtitle">Set new goal</h1>
       <section class="submit-goal">
@@ -94,19 +127,38 @@
       })
     </script>
 
+    
     <!--Script for carousel-->
     <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.6.0/dist/glide.min.js"></script>
     <script>
-      new Glide('.glide', {
+      const goalsCount = <%= JSON.stringify(goals.length) %>
+
+      function decideLayout() {
+        const width = window.innerWidth
+        const minGoals = width < 800 ? 3 : 6
+
+        if(goalsCount >= minGoals){
+          document.getElementById('carousel-container').style.display = 'block'
+
+          new Glide('.glide', {
         type: 'carousel',
         perView: 7,
         focusAt: 'center',
         gap: 20,
         breakpoints: {
-          1024: {perView:4},
-          600: {perView:2}
+          800: {perView:3},
+          680: {perView:2}
         }
       }).mount()
+        }else {
+          document.getElementById('grid-container').style.display = 'flex'
+        }
+      }
+     
+      window.addEventListener('DOMContentLoaded', decideLayout);
+      window.addEventListener('resize', () => {
+        location.reload();
+      })
     </script>
     
     

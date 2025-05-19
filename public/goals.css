@@ -76,6 +76,8 @@
     display: flex;
     justify-content: center;
   }
+
+  /* Card section*/
   .goal-card{
     flex: 0 0 auto;
     scroll-snap-align: center;
@@ -123,3 +125,23 @@
     transform: rotateY(180deg);
   }
   
+  /* Non-carousel goal layout */
+.goals-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.goals-grid .goal-card {
+  width: 200px;
+  height: 300px;
+  perspective: 1000px;
+  cursor: pointer;
+  position: relative;
+  scroll-snap-align: unset; /* remove carousel behavior */
+  flex: 0 0 auto;
+}

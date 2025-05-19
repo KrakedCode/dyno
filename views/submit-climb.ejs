@@ -53,6 +53,35 @@
           <button type="submit" class="form__btn">Submit Now</button>
         </form>
       </div>
+
+      <button id="deleteBtn" class="danger-btn">
+        Delete Most Recent Climb
+      </button>
+      <div id="confirmModal" class="modal hidden">
+        <div class="modal-content">
+          <p>Are you sure you want to delete your most recent climb</p>
+          <form action="/delete-recent-climb" method="POST">
+            <button type="submit" class="yesBtn">Yes</button>
+            <button type="button" id="cancelBtn">No</button>
+          </form>
+        </div>
+      </div>
     </section>
+
+    <!--Scripts-->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const deleteBtn = document.getElementById("deleteBtn");
+        const modal = document.getElementById("confirmModal");
+        const cancelBtn = document.getElementById("cancelBtn");
+
+        deleteBtn.addEventListener("click", () => {
+          modal.classList.toggle("hidden");
+        });
+        cancelBtn.addEventListener("click", () => {
+          modal.classList.toggle("hidden");
+        });
+      });
+    </script>
   </body>
 </html>

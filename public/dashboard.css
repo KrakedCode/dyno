@@ -17,6 +17,18 @@
     color: inherit;
   }
   
+  .link__label {
+    padding: 0.75rem 1.5rem;
+    background-color: #156106;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .link__label:hover {
+    background-color: #000000;
+  }
   /* Navbar */
   .navbar {
     background-color: #1e1e2f;
@@ -53,6 +65,35 @@
   .navbar__item .label:hover {
     color: #ff8800;
   }
+
+  /*hamburger section */
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+  }
+
+  .hamburger span {
+    width: 25px;
+    height: 3px;
+    background: white;
+    transition: all 0.3s ease;
+  }
+
+  /*hamburger active section */
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
   
   /* Hero Section */
   .hero__banner {
@@ -62,6 +103,11 @@
     justify-content: center;
     position: relative;
     color: #fff;
+    
+    background-image: url("/public/images/hero-rock.jpg");
+    background-size: cover;
+    background-position: center;
+    
   }
   
   .hero__overlay {
@@ -245,7 +291,7 @@
   }
   
   /* Responsive */
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     .hero__title {
       font-size: 1.8rem;
     }
@@ -256,6 +302,27 @@
   
     .main__content h2 {
       font-size: 1.5rem;
+    }
+
+    .hamburger {
+      display: flex;
+    }
+    .navbar__menu {
+      position: absolute;
+      top: 70px;
+      right: 20px;
+      background: #1e1e2f;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 1rem;
+      border-radius: 8px;
+      gap: 1rem;
+      z-index: 1000;
+      display: none;
+    }
+
+    .navbar__menu.active {
+      display: flex;
     }
   }
   

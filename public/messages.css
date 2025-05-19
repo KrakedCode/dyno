@@ -24,7 +24,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
+    /*
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999; 
+    */
+}
   
   .navbar__container {
     display: flex;
@@ -56,6 +63,7 @@
   
   /* Hero Banner */
   .hero__banner {
+    margin-top: 70px;
     height: 15vh;
     display: flex;
     align-items: center;
@@ -96,8 +104,12 @@
   }
   
   .chat__container {
-    max-width: 800px;
+    max-width: 120vh;
     margin: 0 auto;
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+
   }
   
   .chat__list {

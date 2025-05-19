@@ -15,9 +15,14 @@
     <nav class="navbar">
       <div class="navbar__container">
         <a href="/" id="navbar__logo">
-          <i class="fa-solid fa-star">‌</i>Climb Pros</a
-        >
-        <ul class="navbar__menu">
+          <i class="fa-solid fa-star">‌</i>Climb Pros
+        </a>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <ul class="navbar__menu" id="navMenu">
           <li class="navbar__item">
             <a href="/" class="label">Home</a>
           </li>
@@ -41,14 +46,7 @@
     </nav>
 
     <!--New hero content-->
-    <section
-      class="hero__banner"
-      style="
-        background-image: url('/public/images/hero-rock.jpg');
-        background-size: cover;
-        background-position: center;
-      "
-    >
+    <section class="hero__banner">
       <div class="hero__overlay">
         <div class="hero__content">
           <h1 class="hero__title">Welcome back, <%= user.username %>!</h1>
@@ -86,12 +84,15 @@
     <section class="main__section">
       <div class="main__container">
         <div class="main__content">
-          <h2>Track your progress, climb smarter.</h2>
+          <h2>Check out the competition</h2>
           <p>
-            Use Climb Pros to log climbs, analyze your stats, and see how you
-            rank on the leaderboard. Whether you're chasing your first V3 or
-            projecting a V10 — we've got your back.
+            Check out the Climb Pros leaderboard to see how you stack up against
+            other crushers. Whether you're topping charts or just getting
+            started — the beta is all here. Track your progress, celebrate every
+            send, and climb your way to the top.
           </p>
+          <br />
+          <a href="/leaderboard" class="link__label">See Where You Stand</a>
         </div>
       </div>
     </section>
@@ -138,5 +139,16 @@
         <p>&copy; 2025 Climb Pros | Keep Climbing 🚀</p>
       </div>
     </footer>
+
+    <!--scripts-->
+    <script>
+      const hamburger = document.getElementById("hamburger");
+      const navMenu = document.getElementById("navMenu");
+
+      hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        navMenu.classList.toggle("active");
+      });
+    </script>
   </body>
 </html>

@@ -6,6 +6,8 @@ const cookieParser = require('cookie-parser')
 //for carousel
 //const glider = require("glider")
 
+//mobile detection
+const MobileDetect = require('mobile-detect')
 
 //password encryption for storing in the database
 const bcrypt = require("bcrypt")
@@ -106,6 +108,53 @@ app.use(cookieParser())
 
 //functions 
 
+function updateUser(req,res) {
+    //attempted climbs
+    const sumOfAttemptedClimbsStatement = db.prepare(`SELECT SUM(attempts) AS total FROM climbs WHERE user = ?`).get(req.user.userid).total
+
+//flashes
+    const flashStatement = db.prepare(`SELECT COUNT(*) AS count FROM climbs WHERE user = ? AND attempts =1`).get(req.user.userid).count
+
+//completed climbs
+    const completedClimbStatement = db.prepare(`SELECT COUNT(*) AS count FROM climbs WHERE user =?`).get(req.user.userid).count
+
+//best completed climbs 
+    const bestCompletedClimbStatement = db.prepare(`SELECT MAX(difficulty) AS max FROM climbs WHERE user = ?`).get(req.user.userid).max
+
+
+
+
+    //update the user table 
+    const updateUserTableStatement = db.prepare(`UPDATE users SET attemptedClimbs = ?, flashes = ?, completedClimbs = ?, bestCompletedClimb = ? WHERE id = ?`)
+
+    updateUserTableStatement.run(sumOfAttemptedClimbsStatement, flashStatement, completedClimbStatement, bestCompletedClimbStatement, req.user.userid)
+}
+function updateCookie(req,res) {
+    
+
+    
+    const updatedUser = db.prepare(`SELECT * FROM users WHERE id = ?`).get(req.user.userid)
+
+    res.clearCookie("ClimbPros")
+    //sign in with cookie
+    const ourTokenValue = jwt.sign(
+    {exp: Math.floor(Date.now() /1000) + 60 * 60 * 24,
+            userid: updatedUser.id,
+            username: updatedUser.username,
+            climbs: updatedUser.attemptedClimbs,
+            topOuts: updatedUser.completedClimbs,
+            best: updatedUser.bestCompletedClimb,
+            flash: updatedUser.flashes },
+        process.env.JWTSECRET
+    )
+
+    res.cookie("ClimbPros", ourTokenValue, {
+        httpOnly:true,
+        secure: true,
+        sameSite: "strict",
+        maxAge: 1000* 60 * 60 * 24
+    })
+}
 
 function securedUser(req,res,next) {
     console.log("entered secured user")
@@ -136,7 +185,14 @@ app.use(function (req,res,next) {
 
     res.locals.user = req.user
     console.log(req.user)
-    
+    /*
+    const ua = req.headers['user-agent'] || '';
+    const isMobile = /android|iphone|ipad|ipod|mobile/i.test(ua);
+    res.locals.isMobile = isMobile;
+
+    console.log('User-Agent:', ua);
+    console.log('Mobile detected:', isMobile);
+    */
     next()
 })
 //get requests
@@ -185,7 +241,14 @@ app.get("/intro-complete", (req,res) => {
 app.get("/goals", securedUser, (req,res) => {
     const userGoalStatement = db.prepare(`SELECT * FROM goals WHERE userid =?`)
     const goals = userGoalStatement.all(req.user.userid)
-    
+    /*
+    const isMobile = res.locals.isMobile
+    const minGoals = isMobile ? 3 : 6 
+
+    res.render("goals", {goals,isMobile, minGoals})
+
+    */
+
     res.render("goals", {goals})
 })
 
@@ -455,7 +518,7 @@ app.post("/forgot-password" , (req,res) => {
     db.prepare(`INSERT INTO reset_tokens (user_id, token, expiry) VALUEs (?,?,?)`)
         .run(userInQuestion.id, token, expiry)
 
-        const link = `http://localhost:300/reset-password/${token}`;
+        const link = `http://localhost:3000/reset-password/${token}`;
 
   res.send(`Password reset link: <a href="${link}">${link}</a>`)
 
@@ -497,95 +560,90 @@ app.post("/submitClimb" ,securedUser,  (req,res) => {
     const climbStatement = db.prepare(`INSERT INTO climbs (difficulty, attempts, user) VALUES (?, ?, ?) `)
     climbStatement.run(req.body.difficulty, req.body.attempts, req.user.userid)
     
-//attempted climbs
-const sumOfAttemptedClimbsStatement = db.prepare(`SELECT SUM(attempts) AS total FROM climbs WHERE user = ?`).get(req.user.userid).total
+    updateUser(req,res)
+    //cookie time
+    updateCookie(req,res)
 
-//flashes
-const flashStatement = db.prepare(`SELECT COUNT(*) AS count FROM climbs WHERE user = ? AND attempts =1`).get(req.user.userid).count
-
-//completed climbs
-const completedClimbStatement = db.prepare(`SELECT COUNT(*) AS count FROM climbs WHERE user =?`).get(req.user.userid).count
-
-//best completed climbs 
-const bestCompletedClimbStatement = db.prepare(`SELECT MAX(difficulty) AS max FROM climbs WHERE user = ?`).get(req.user.userid).max
-
-
-
-
-//update the user table 
-const updateUserTableStatement = db.prepare(`UPDATE users SET attemptedClimbs = ?, flashes = ?, completedClimbs = ?, bestCompletedClimb = ? WHERE id = ?`)
-
-updateUserTableStatement.run(sumOfAttemptedClimbsStatement, flashStatement, completedClimbStatement, bestCompletedClimbStatement, req.user.userid)
-
-//update goals table
-const updatedUser = db.prepare(`SELECT * FROM users WHERE id = ?`).get(req.user.userid)
-const goals = db.prepare(`SELECT * FROM goals WHERE userid = ?`).all(req.user.userid)
-
-for( const goal of goals) {
+    //update goals table
     
-    let newProgress = 0
+    const goals = db.prepare(`SELECT * FROM goals WHERE userid = ?`).all(req.user.userid)
 
-    switch (goal.category) {
-        case "climbs":
-            increment = req.body.attempts
-            break
-        case "flashes":
-            if(req.body.attempts == 1) increment = 1
-            break
-        case "topouts":
-            increment = 1
-            break
-        case "difficulty":
-            if(req.body.difficulty > goal.progress){
-                db.prepare(`UPDATE goals SET progress = ? WHERE id =?`)
-                .run(req.body.difficulty,goal.id)
+    for( const goal of goals) {
+    
+        let increment = 0
+
+        switch (goal.category) {
+            case "climbs":
+                increment = req.body.attempts
+                break
+            case "flashes":
+                if(req.body.attempts == 1) increment = 1
+                break
+            case "topouts":
+                increment = 1
+                break
+            case "difficulty":
+                if(req.body.difficulty > goal.progress){
+                    db.prepare(`UPDATE goals SET progress = ? WHERE id =?`)
+                    .run(req.body.difficulty,goal.id)
+                    const updatedProgress = db.prepare(`SELECT * from goals WHERE id = ?`).get(goal.id)
+
+                    if(updatedProgress.progress >= goal.goal){
+                        db.prepare(`DELETE FROM goals WHERE id = ?`).run(goal.id)
+                    }
+                    continue
+                }
+                break
+            default:
+                console.warn(`Unknown goal category: ${goal.category}`)
                 continue
-            }
-            break
-        default:
-            console.warn(`Unknown goal category: ${goal.category}`)
-            continue
             
-    }
-    if(newProgress > 0){
+        }
+        console.log("Attempts = ", req.body.attemps)
+        if(increment > 0){
 
     
-    db.prepare(`
-        UPDATE goals
-        SET progress = progress + ?
-        WHERE id = ?
-        `).run(newProgress,goal.id)
+         db.prepare(`
+            UPDATE goals
+            SET progress = progress + ?
+            WHERE id = ?
+            `).run(increment,goal.id)
 
-    }
-
-    if(goal.progress >= goal.goal){
+        }
+        
+    const updatedProgress = db.prepare(`SELECT * from goals WHERE id = ?`).get(goal.id)
+    if(updatedProgress.progress >= goal.goal){
         db.prepare(`DELETE FROM goals WHERE id = ?`).run(goal.id)
     }
 } 
     
 
-res.clearCookie("ClimbPros")
-//sign in with cookie
-const ourTokenValue = jwt.sign(
-{exp: Math.floor(Date.now() /1000) + 60 * 60 * 24,
-            userid: updatedUser.id,
-            username: updatedUser.username,
-            climbs: updatedUser.attemptedClimbs,
-            topOuts: updatedUser.completedClimbs,
-            best: updatedUser.bestCompletedClimb,
-            flash: updatedUser.flashes },
-        process.env.JWTSECRET
-    )
-
-    res.cookie("ClimbPros", ourTokenValue, {
-        httpOnly:true,
-        secure: true,
-        sameSite: "strict",
-        maxAge: 1000* 60 * 60 * 24
-    })
+    
 
     
     res.redirect("/")
+})
+
+app.post("/delete-recent-climb",securedUser, async (req,res) => {
+    const userId = req.user.userid
+
+        const recentClimb = db.prepare(`
+            SELECT rowid FROM climbs
+            WHERE user = ?
+            ORDER BY rowid DESC
+            LIMIT 1
+            `).get(userId)
+
+            if(recentClimb){
+                db.prepare(`
+                    DELETE FROM climbs 
+                    WHERE rowid = ?
+                    `).run(recentClimb.rowid)
+            }
+
+            updateUser(req,res)
+            updateCookie(req,res)
+        res.redirect("/")
 })
 
 app.post("/updateStats",securedUser,  (req,res) => {
@@ -607,26 +665,7 @@ app.post("/updateStats",securedUser,  (req,res) => {
     
         updatedStatement.run(req.body.climbs, req.body.topOut, req.body.difficulty, req.body.flashed, req.user.userid)
 
-    const updatedUser = db.prepare(`SELECT * FROM users WHERE id =?`).get(req.user.userid)
-    res.clearCookie("ClimbPros")
-    //sign in with cookie
-    const ourTokenValue = jwt.sign(
-        {exp: Math.floor(Date.now() /1000) + 60 * 60 * 24,
-                userid: updatedUser.id,
-                username: updatedUser.username,
-                climbs: updatedUser.attemptedClimbs,
-                topOuts: updatedUser.completedClimbs,
-                best: updatedUser.bestCompletedClimb,
-                flash: updatedUser.flashes },
-             process.env.JWTSECRET
-    )
-
-    res.cookie("ClimbPros", ourTokenValue, {
-        httpOnly:true,
-        secure: true,
-        sameSite: "strict",
-        maxAge: 1000* 60 * 60 * 24
-    })
+    updateCookie(req,res)
 
 
     db.prepare(`DELETE FROM climbs WHERE user = ?`).run(req.user.userid)
@@ -777,7 +816,7 @@ app.post("/submit-Goal", securedUser, (req,res) => {
     const goalStatement = db.prepare(`INSERT INTO goals (title, progress,goal,category , userid) VALUES (?,0,?,?,?)`)
     goalStatement.run(req.body.title, req.body.goal, req.body.category, req.user.userid )
     
-    return res.redirect("goals")
+    return res.redirect("/goals")
 })
 
 
